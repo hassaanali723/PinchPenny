@@ -7,6 +7,9 @@ import DEMO from "../../store/constant";
 import avatar1 from "../../assets/images/user/avatar-1.jpg";
 import avatar2 from "../../assets/images/user/avatar-2.jpg";
 import avatar3 from "../../assets/images/user/avatar-3.jpg";
+import MultiBarChart from "../Charts/Nvd3Chart/MultiBarChart";
+import BarDiscreteChart from "../Charts/Nvd3Chart/BarDiscreteChart";
+import PieDonutChart from "../Charts/Nvd3Chart/PieDonutChart";
 
 class Dashboard extends React.Component {
   render() {
@@ -88,7 +91,7 @@ class Dashboard extends React.Component {
             </span>
           </div>
         </div>
-        <div className="media friendlist-box align-items-center justify-content-center m-b-20">
+        {/* <div className="media friendlist-box align-items-center justify-content-center m-b-20">
           <div className="m-r-10 photo-table">
             <a href={DEMO.BLANK_LINK}>
               <img
@@ -106,8 +109,8 @@ class Dashboard extends React.Component {
               8750
             </span>
           </div>
-        </div>
-        <div className="media friendlist-box align-items-center justify-content-center">
+        </div> */}
+        {/* <div className="media friendlist-box align-items-center justify-content-center">
           <div className="m-r-10 photo-table">
             <a href={DEMO.BLANK_LINK}>
               <img
@@ -125,7 +128,7 @@ class Dashboard extends React.Component {
               8750
             </span>
           </div>
-        </div>
+        </div> */}
       </Aux>
     );
 
@@ -220,6 +223,7 @@ class Dashboard extends React.Component {
             </Card>
           </Col>
           <Col md={6} xl={8}>
+            <MultiBarChart />
             {/* <Card className='Recent-Users'>
                             <Card.Header>
                                 <Card.Title as='h5'>Recent Users</Card.Title>
@@ -288,6 +292,8 @@ class Dashboard extends React.Component {
                         </Card> */}
           </Col>
           <Col md={6} xl={4}>
+            <PieDonutChart />
+
             {/* <Card className="card-event">
               <Card.Body>
                 <div className="row align-items-center justify-content-center">
@@ -490,6 +496,7 @@ class Dashboard extends React.Component {
             </Card>
           </Col> */}
           <Col md={6} xl={4}>
+            <BarDiscreteChart />
             {/* <Card>
               <Card.Header>
                 <Card.Title as="h5">Rating</Card.Title>
