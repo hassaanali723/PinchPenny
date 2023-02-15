@@ -1,3 +1,4 @@
+import { registerUser } from "../../services/auth.service";
 import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,

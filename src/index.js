@@ -9,19 +9,21 @@ import * as serviceWorker from "./serviceWorker";
 import reducer from "./store/reducers/reducer";
 import config from "./config";
 import authReducer from "./store/reducers/register.reducers";
+import { QueryClientProvider, QueryClient } from "react-query";
 
 const baseReducer = combineReducers({
   utilityReducer: reducer,
-  authReducer: authReducer,
 });
 
 const store = createStore(baseReducer);
+const queryClient = new QueryClient();
 
 const app = (
   <Provider store={store}>
     <BrowserRouter basename={config.basename}>
-      {/* basename="/datta-able" */}
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
     </BrowserRouter>
   </Provider>
 );

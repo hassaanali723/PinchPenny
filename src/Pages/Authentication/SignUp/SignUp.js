@@ -2,17 +2,15 @@ import { NavLink } from "react-router-dom";
 import "./../../../assets/scss/style.scss";
 import Aux from "../../../hoc/_Aux";
 import Breadcrumb from "../../../App/layout/AdminLayout/Breadcrumb";
-import DEMO from "../../../store/constant";
-
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useMutation } from "react-query";
-// import { register as registerApi } from "./api";
+import { createUser } from "../../../services/auth.service";
 import {
   registerRequest,
   registerSuccess,
   registerFailure,
 } from "../../../store/actions/auth.actions";
+import { useMutation } from "react-query";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -20,24 +18,16 @@ const SignUp = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const initialState = useSelector((state) => state.authReducer);
+  const { data, isLoading, error, mutate: register } = useMutation(createUser);
 
-  //   const [register, { status, error }] = useMutation(registerApi, {
-  //     onSuccess: (user) => {
-  //       dispatch(registerSuccess(user));
-  //     },
-  //     onError: (error) => {
-  //       dispatch(registerFailure(error.message));
-  //     },
-  //   });
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(firstName, lastName, email, password);
-    dispatch(registerRequest({ firstName, lastName, email, password }));
-    console.log(initialState);
-    // register(firstName, lastName, email, password);
+    const user = { firstName, lastName, email, password };
+    register(user);
   };
+
+  if (isLoading) return <h1>Loading...</h1>;
+  if (error) return <h1>Error in loading</h1>;
 
   return (
     <Aux>
@@ -93,19 +83,6 @@ const SignUp = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-                {/* <div className="form-group text-left">
-                <div className="checkbox checkbox-fill d-inline">
-                  <input
-                    type="checkbox"
-                    name="checkbox-fill-2"
-                    id="checkbox-fill-2"
-                  />
-                  <label htmlFor="checkbox-fill-2" className="cr">
-                    Send me the <a href={DEMO.BLANK_LINK}> Newsletter</a>{" "}
-                    weekly.
-                  </label>
-                </div>
-              </div> */}
                 <button type="submit" className="btn btn-primary shadow-2 mb-4">
                   Sign up
                 </button>
