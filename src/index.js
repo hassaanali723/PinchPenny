@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "redux";
+import { combineReducers, createStore } from "redux";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
@@ -8,8 +8,14 @@ import App from "./App/index";
 import * as serviceWorker from "./serviceWorker";
 import reducer from "./store/reducers/reducer";
 import config from "./config";
+import authReducer from "./store/reducers/register.reducers";
 
-const store = createStore(reducer);
+const baseReducer = combineReducers({
+  utilityReducer: reducer,
+  authReducer: authReducer,
+});
+
+const store = createStore(baseReducer);
 
 const app = (
   <Provider store={store}>
